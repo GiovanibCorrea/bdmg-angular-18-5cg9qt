@@ -1,0 +1,138 @@
+<div class="register-form">
+    <form [formGroup]="zipForm" (ngSubmit)="add(zipForm.value)">
+      <div class="form-group">
+        <label>CEP</label>
+        <input
+          type="text"
+          name="cep"
+          formControlName="cep"
+          class="form-control"
+          placeholder="00000-000"
+          [maxlength]="9"
+          [minlength]="9"
+          value="{{endereco.cep}}"
+          (keyup)="modelChange($event, 'cep')"
+          />
+      </div>
+  
+      <div class="form-group">
+        <label>Logradouro</label>
+        <input
+          type="text"
+          placeholder="Logradouro"
+          name="logradouro"
+          formControlName="logradouro"
+          value="{{endereco.logradouro}}"
+          (keyup)="modelChange($event, 'logradouro')"
+          class="form-control" />
+      </div>
+  
+      <div class="form-group">
+        <label>Complemento</label>
+        <input
+          type="text"
+          placeholder="00000"
+          name="complemento"
+          formControlName="complemento"
+          class="form-control"
+          [readonly]="false"
+          [maxlength]="10"
+          [minlength]="1"
+          value="{{endereco.complemento}}"
+          (keyup)="modelChange($event, 'complemento')" />
+      </div>
+  
+      <div class="form-group">
+        <label>Bairro</label>
+        <input
+          type="text"
+          placeholder="Bairro"
+          name="bairro"
+          formControlName="bairro"
+          value="{{endereco.bairro}}"
+          (keyup)="modelChange($event, 'bairro')"
+          class="form-control" />
+      </div>
+  
+      <div class="form-group">
+        <label>Localidade</label>
+        <input
+          type="text"
+          placeholder=""
+          name="localidade"
+          formControlName="localidade"
+          value="{{endereco.localidade}}"
+          (keyup)="modelChange($event, 'localidade')"
+          class="form-control" />
+      </div>
+  
+      <div class="form-group">
+        <label>UF</label>
+        <input
+          type="text"
+          placeholder=""
+          name="uf"
+          formControlName="uf"
+          [maxlength]="2"
+          [minlength]="2"
+          value="{{endereco.uf}}"
+          (keyup)="modelChange($event, 'uf')"
+          class="form-control" />
+      </div>
+  
+      <div class="form-group">
+        <label>IBGE</label>
+        <input
+          type="text"
+          placeholder=""
+          name="ibge"
+          formControlName="ibge"        
+          [readonly]="true"
+          value="{{endereco.ibge}}"
+          class="form-control" />
+      </div>
+  
+      <div class="form-group">
+        <label>GIA</label>
+        <input
+          type="text"
+          placeholder=""
+          name="gia"
+          formControlName="gia"   
+          value="{{endereco.gia}}"   
+          (keyup)="modelChange($event, 'gia')"  
+          class="form-control" />
+      </div>
+  
+      <div class="form-group">
+        <label>DDD</label>
+        <input
+          type="text"
+          placeholder=""
+          name="ddd"
+          formControlName="ddd"
+          [maxlength]="2"
+          [minlength]="2"
+          value="{{endereco.ddd}}"
+          (keyup)="modelChange($event, 'ddd')"
+          class="form-control" />
+      </div>
+  
+      <div class="form-group">
+        <label>SIAFI</label>
+        <input
+          type="text"
+          placeholder=""
+          name="siafi"
+          formControlName="siafi"        
+          [readonly]="true"
+          value="{{endereco.siafi}}"
+          class="form-control" />
+      </div>
+  
+      <button [disabled]="!isValid">Salvar</button>
+  
+    </form>
+  </div>
+
+  <p>{{cep}}</p>
