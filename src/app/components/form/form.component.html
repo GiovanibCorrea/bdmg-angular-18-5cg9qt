@@ -1,138 +1,149 @@
-<div class="register-form">
-    <form [formGroup]="zipForm" (ngSubmit)="add(zipForm.value)">
-      <div class="form-group">
-        <label>CEP</label>
-        <input
-          type="text"
-          name="cep"
-          formControlName="cep"
-          class="form-control"
-          placeholder="00000-000"
-          [maxlength]="9"
-          [minlength]="9"
-          value="{{endereco.cep}}"
-          (keyup)="modelChange($event, 'cep')"
-          />
+<div class="address-form">
+    <form [formGroup]="enderecoForm" (ngSubmit)="salvar(enderecoForm.value)">
+      <div class="block-input">
+        <mat-form-field class="example-full-width">
+          <mat-label>CEP</mat-label>
+          <input matInput
+            type="text"
+            name="cep"
+            formControlName="cep"
+            class="form-control"
+            placeholder="Cep"
+            [mask]="cepMask"
+            value="{{endereco.cep}}"
+            (keyup)="modelChange($event, 'cep')"
+            />
+        </mat-form-field>
+        
+        <mat-form-field class="example-full-width">
+          <mat-label>Logradouro</mat-label>
+          <input matInput
+            type="text"
+            placeholder="Logradouro"
+            name="logradouro"
+            formControlName="logradouro"
+            value="{{endereco.logradouro}}"
+            (keyup)="modelChange($event, 'logradouro')"
+            class="form-control" />
+        </mat-form-field>
       </div>
-  
-      <div class="form-group">
-        <label>Logradouro</label>
-        <input
-          type="text"
-          placeholder="Logradouro"
-          name="logradouro"
-          formControlName="logradouro"
-          value="{{endereco.logradouro}}"
-          (keyup)="modelChange($event, 'logradouro')"
-          class="form-control" />
+      <div class="block-input">
+        <mat-form-field class="example-full-width">
+          <mat-label>Complemento</mat-label>
+          <input matInput
+            type="text"
+            placeholder="00000"
+            name="complemento"
+            formControlName="complemento"
+            class="form-control"
+            [mask]="complementoMask"
+            value="{{endereco.complemento}}"
+            (keyup)="modelChange($event, 'complemento')" />
+        </mat-form-field>
+    
+        <mat-form-field class="example-full-width">
+          <mat-label>Bairro</mat-label>
+          <input matInput
+            type="text"
+            placeholder="Bairro"
+            name="bairro"
+            formControlName="bairro"
+            value="{{endereco.bairro}}"
+            (keyup)="modelChange($event, 'bairro')"
+            class="form-control" />
+        </mat-form-field>
       </div>
-  
-      <div class="form-group">
-        <label>Complemento</label>
-        <input
-          type="text"
-          placeholder="00000"
-          name="complemento"
-          formControlName="complemento"
-          class="form-control"
-          [readonly]="false"
-          [maxlength]="10"
-          [minlength]="1"
-          value="{{endereco.complemento}}"
-          (keyup)="modelChange($event, 'complemento')" />
+      <div class="block-input triple-block">
+        <mat-form-field class="example-full-width">
+          <mat-label>Localidade</mat-label>
+          <input matInput
+            type="text"
+            placeholder=""
+            name="localidade"
+            formControlName="localidade"
+            value="{{endereco.localidade}}"
+            (keyup)="modelChange($event, 'localidade')"
+            class="form-control" />
+        </mat-form-field>
+    
+        <mat-form-field class="example-full-width">
+          <mat-label>UF</mat-label>
+          <input matInput
+            type="text"
+            placeholder=""
+            name="uf"
+            formControlName="uf"
+            value="{{endereco.uf}}"
+            (keyup)="modelChange($event, 'uf')"
+            class="form-control" />
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <mat-label>DDD</mat-label>
+            <input matInput
+              type="text"
+              placeholder="DDD"
+              name="ddd"
+              formControlName="ddd"
+              value="{{endereco.ddd}}"
+              (keyup)="modelChange($event, 'ddd')"
+              class="form-control" />
+          </mat-form-field>
       </div>
-  
-      <div class="form-group">
-        <label>Bairro</label>
-        <input
-          type="text"
-          placeholder="Bairro"
-          name="bairro"
-          formControlName="bairro"
-          value="{{endereco.bairro}}"
-          (keyup)="modelChange($event, 'bairro')"
-          class="form-control" />
+      <div class="block-input triple-block">
+        <mat-form-field class="example-full-width">
+          <mat-label>IBGE</mat-label>
+          <input matInput readonly
+            type="text"
+            placeholder=""
+            name="ibge"
+            formControlName="ibge"
+            value="{{endereco.ibge}}"
+            class="form-control" />
+        </mat-form-field>
+    
+        <mat-form-field class="example-full-width">
+          <mat-label>GIA</mat-label>
+          <input matInput
+            type="text"
+            placeholder="Gia"
+            name="gia"
+            formControlName="gia"   
+            value="{{endereco.gia}}"   
+            (keyup)="modelChange($event, 'gia')"  
+            class="form-control" />
+        </mat-form-field>
+    
+    
+        <mat-form-field class="example-full-width">
+          <mat-label>SIAFI</mat-label>
+          <input matInput readonly
+            type="text"
+            placeholder="Siafi"
+            name="siafi"
+            formControlName="siafi"
+            value="{{endereco.siafi}}"
+            class="form-control" />
+        </mat-form-field>
       </div>
-  
-      <div class="form-group">
-        <label>Localidade</label>
-        <input
-          type="text"
-          placeholder=""
-          name="localidade"
-          formControlName="localidade"
-          value="{{endereco.localidade}}"
-          (keyup)="modelChange($event, 'localidade')"
-          class="form-control" />
-      </div>
-  
-      <div class="form-group">
-        <label>UF</label>
-        <input
-          type="text"
-          placeholder=""
-          name="uf"
-          formControlName="uf"
-          [maxlength]="2"
-          [minlength]="2"
-          value="{{endereco.uf}}"
-          (keyup)="modelChange($event, 'uf')"
-          class="form-control" />
-      </div>
-  
-      <div class="form-group">
-        <label>IBGE</label>
-        <input
-          type="text"
-          placeholder=""
-          name="ibge"
-          formControlName="ibge"        
-          [readonly]="true"
-          value="{{endereco.ibge}}"
-          class="form-control" />
-      </div>
-  
-      <div class="form-group">
-        <label>GIA</label>
-        <input
-          type="text"
-          placeholder=""
-          name="gia"
-          formControlName="gia"   
-          value="{{endereco.gia}}"   
-          (keyup)="modelChange($event, 'gia')"  
-          class="form-control" />
-      </div>
-  
-      <div class="form-group">
-        <label>DDD</label>
-        <input
-          type="text"
-          placeholder=""
-          name="ddd"
-          formControlName="ddd"
-          [maxlength]="2"
-          [minlength]="2"
-          value="{{endereco.ddd}}"
-          (keyup)="modelChange($event, 'ddd')"
-          class="form-control" />
-      </div>
-  
-      <div class="form-group">
-        <label>SIAFI</label>
-        <input
-          type="text"
-          placeholder=""
-          name="siafi"
-          formControlName="siafi"        
-          [readonly]="true"
-          value="{{endereco.siafi}}"
-          class="form-control" />
-      </div>
-  
-      <button [disabled]="!isValid">Salvar</button>
+
+      <br />
+
+      <button mat-flat-button [disabled]="!isValid">Salvar</button>
   
     </form>
   </div>
 
-  <p>{{cep}}</p>
+  <div *ngIf="formSalvo" class="resume">
+    <h4 class="title">Dados do endereço salvo:</h4>
+    <p><b>Cep:</b> {{enderecoSalvo.cep}}</p>
+    <p><b>Logradouro:</b> {{enderecoSalvo.logradouro}}</p>
+    <p><b>Complemento:</b> {{enderecoSalvo.complemento}}</p>
+    <p><b>Bairro:</b> {{enderecoSalvo.bairro}}</p>
+    <p><b>Localidade:</b> {{enderecoSalvo.localidade}}</p>
+    <p><b>UF:</b> {{enderecoSalvo.uf}}</p>
+    <p><b>DDD:</b> {{enderecoSalvo.ddd}}</p>
+    <p><b>IBGE:</b> {{enderecoSalvo.ibge}}</p>
+    <p><b>Gia:</b> {{enderecoSalvo.gia}}</p>
+    <p><b>SIAFI:</b> {{enderecoSalvo.siafi}}</p>
+
+  </div>

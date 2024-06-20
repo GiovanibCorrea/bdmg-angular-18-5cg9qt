@@ -1,0 +1,32 @@
+.address-form {
+    width: 100%;
+
+    form {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-direction: column;
+        columns: 2;
+
+        .block-input {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            .mat-mdc-form-field {
+                width: calc(50% - 5px);
+            }
+
+            .form-control {
+                margin-bottom: 10px;
+            }
+
+            &.triple-block {
+                .mat-mdc-form-field {
+                    max-width: 33%;
+                }
+            }
+        }
+    }
+}

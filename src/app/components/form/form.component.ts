@@ -1,54 +1,57 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';  
+import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { CepService } from '../../services/cep.service';
 import { Endereco } from '../../models/endereco.model';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {
-  FormBuilder,
-  FormGroup,
-  FormControl,
-} from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatButtonModule} from '@angular/material/button';
+import { FormBuilder,FormGroup, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'formCep',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule],
+  imports: [CommonModule, FormsModule, NgxMaskDirective, ReactiveFormsModule, MatFormFieldModule, MatButtonModule, MatInputModule],
+  providers: [provideNgxMask({ })],
   templateUrl: './form.component.html',
-  styleUrl: './form.component.css'
+  styleUrl: './form.component.scss'
 })
 export class FormComponent implements OnInit {
-
-  public zips: any;
-  public zip: any;
-  public zipForm: FormGroup;
+  public cepMask = '00000-000';
+  public complementoMask = '0.000';
+  public enderecoForm: FormGroup;
   public isValid: boolean = false;
   public endereco: Endereco;
-  public cep: any;
+  public formSalvo: boolean = false;
+  public enderecoSalvo: any;
 
   constructor(
     private cepService: CepService,
     private formBuilder: FormBuilder
   ) {
-    this.zipForm = this.formBuilder.group({
+    this.enderecoForm = this.formBuilder.group({
       cep: new FormControl(''),
       logradouro: '',
-      complemento: 0,
+      complemento: '',
       bairro: '',
       localidade: '',
       uf: '',
       ibge: '',
       gia: '',
-      ddd: 0,
-      siafi: 0,
+      ddd: '',
+      siafi: '',
     });
 
     this.endereco = new Endereco;
+    this.enderecoSalvo = new Endereco;
   }
 
   ngOnInit() {
     this.cepService.initialSearch().subscribe((retorno: Endereco) => {
       this.endereco = retorno;
 
-      this.zipForm.patchValue({
+      this.enderecoForm.patchValue({
         cep: this.endereco.cep,
         logradouro: this.endereco.logradouro,
         complemento: this.endereco.complemento,
@@ -64,16 +67,26 @@ export class FormComponent implements OnInit {
   }
 
   modelChange(e: any, modelName: string) {
-    this.isValid = this.cepService.modelChangeFn(e, modelName, this.zipForm.value);
+    this.isValid = this.cepService.updateContent(e, modelName, this.enderecoForm.value);
   }
 
-  add(zipForm: any) {
-    console.log('zipForm ', zipForm);
-    this.cepService.add(zipForm);
+  salvar(enderecoForm: any) {
+    this.cepService.add(enderecoForm);
+    this.formSalvo = false;
     this.popularPagina();
   }
 
   popularPagina() {
-    this.cep = localStorage.getItem('cep');
+    this.enderecoSalvo.cep = localStorage.getItem('cep');
+    this.enderecoSalvo.logradouro = localStorage.getItem('logradouro');
+    this.enderecoSalvo.bairro = localStorage.getItem('bairro');
+    this.enderecoSalvo.complemento = localStorage.getItem('complemento');
+    this.enderecoSalvo.ddd = localStorage.getItem('ddd');
+    this.enderecoSalvo.gia = localStorage.getItem('gia');
+    this.enderecoSalvo.ibge = localStorage.getItem('ibge');
+    this.enderecoSalvo.localidade = localStorage.getItem('localidade');
+    this.enderecoSalvo.siafi = localStorage.getItem('siafi');
+    this.enderecoSalvo.uf = localStorage.getItem('uf');
+    this.formSalvo = true; 
   }
 }

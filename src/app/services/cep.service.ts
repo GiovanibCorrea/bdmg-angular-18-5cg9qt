@@ -16,48 +16,56 @@ export class CepService {
     return this.http.get<Endereco>(this.buscaCep);
   }
 
-  public checkValidate(value: any) {
+  public validateForm(value: any) {
     const { cep, logradouro, complemento, ddd, bairro, localidade, uf, ibge, gia, siafi } = value;
     let valid = true;
-
-    if (cep.length !== 9) {
+    if (!cep) {
       valid = false;
-    } else if (logradouro.length === 0 && valid) {
+    } else if (!logradouro) {
       valid = false;
-    } else if (complemento.length === 0 && valid) {
+    } else if (!complemento) {
       valid = false;
-    } else if (bairro.length === 0 && valid) {
+    } else if (!bairro) {
       valid = false;
-    } else if (localidade.length === 0 && valid) {
+    } else if (!localidade) {
       valid = false;
-    } else if (uf.length !== 2 && valid) {
+    } else if (!uf) {
       valid = false;
-    } else if (ibge.length === 0 && valid) {
+    } else if (!ibge) {
       valid = false;
-    } else if (gia.length === 0 && valid) {
+    } else if (!gia) {
       valid = false;
-    } else if (ddd.length !== 2 && valid) {
+    } else if (!ddd) {
       valid = false;
-    } else if (siafi.length === 0 && valid) {
+    } else if (!siafi) {
       valid = false;
     }
 
     return valid;
   }
 
-  public modelChangeFn(e: any, modelName: string, value: any) {
+  public updateContent(e: any, modelName: string, value: any) {
     console.log(e);
     console.log(modelName);
     console.log(value);
-    return this.checkValidate(value)
+    return this.validateForm(value)
   }
-
-  _commit(endereco: Endereco) {
-    localStorage.setItem("cep", endereco.cep);
-  }
-
+  
   add(endereco: Endereco) {
     localStorage.clear();
-    this._commit(new Endereco(endereco));
+    this.subirLocalStorage(new Endereco(endereco));
+  }
+
+  subirLocalStorage(endereco: Endereco) {
+    localStorage.setItem("cep", endereco.cep);
+    localStorage.setItem("logradouro", endereco.logradouro);
+    localStorage.setItem("uf", endereco.uf);
+    localStorage.setItem("localidade", endereco.localidade);
+    localStorage.setItem("complemento", endereco.complemento);
+    localStorage.setItem("bairro", endereco.bairro);
+    localStorage.setItem("ddd", endereco.ddd);
+    localStorage.setItem("ibge", endereco.ibge);
+    localStorage.setItem("gia", endereco.gia);
+    localStorage.setItem("siafi", endereco.siafi);
   }
 }
