@@ -4,6 +4,7 @@
         <mat-form-field class="example-full-width">
           <mat-label>CEP</mat-label>
           <input matInput
+            [class.is-invalid]="cep.touched && cep.invalid"
             type="text"
             name="cep"
             formControlName="cep"
@@ -36,7 +37,8 @@
             name="complemento"
             formControlName="complemento"
             class="form-control"
-            [mask]="complementoMask"
+            mask="separator"
+            thousandSeparator="."
             value="{{endereco.complemento}}"
             (keyup)="modelChange($event, 'complemento')" />
         </mat-form-field>

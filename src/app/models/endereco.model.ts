@@ -9,11 +9,9 @@ export interface EnderecoDto {
     gia: string;
     ddd: string;
     siafi: string;
-    complete: boolean;
   }
   
   export class Endereco {
-    public id: string;
     public cep: string;
     public logradouro: string;
     public complemento: string;
@@ -24,10 +22,9 @@ export interface EnderecoDto {
     public gia: string;
     public ddd: string;
     public siafi: string;
-    public complete: boolean;
   
     constructor(
-      { cep, logradouro, complete, complemento, bairro, localidade, uf, ibge, gia, ddd, siafi }: EnderecoDto = {
+      { cep, logradouro, complemento, bairro, localidade, uf, ibge, gia, ddd, siafi }: EnderecoDto = {
         cep: '',
         logradouro: '',
         complemento: '',
@@ -37,11 +34,9 @@ export interface EnderecoDto {
         ibge: '',
         gia: '',
         ddd: '',
-        siafi: '',
-        complete: false
+        siafi: ''
       }
     ) {
-      this.id = this.uuidv4();
       this.cep = cep;
       this.logradouro = logradouro;
       this.complemento = complemento;
@@ -52,17 +47,5 @@ export interface EnderecoDto {
       this.gia = gia;
       this.ddd = ddd;
       this.siafi = siafi;
-      this.complete = complete;
-    }
-  
-    uuidv4(): string {
-      return (([1e7] as any) + -1e3 + -4e3 + -8e3 + -1e11).replace(
-        /[018]/g,
-        (c: number) =>
-          (
-            c ^
-            (crypto.getRandomValues(new Uint8Array(1))[0] & (15 >> (c / 4)))
-          ).toString(16)
-      );
     }
   }

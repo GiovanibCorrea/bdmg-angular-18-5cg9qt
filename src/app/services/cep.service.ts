@@ -45,9 +45,6 @@ export class CepService {
   }
 
   public updateContent(e: any, modelName: string, value: any) {
-    console.log(e);
-    console.log(modelName);
-    console.log(value);
     return this.validateForm(value)
   }
   

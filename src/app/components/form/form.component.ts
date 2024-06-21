@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';  
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { CepService } from '../../services/cep.service';
+import { CepValidators } from '../../services/cep.validators';
 import { Endereco } from '../../models/endereco.model';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatButtonModule} from '@angular/material/button';
@@ -26,12 +27,16 @@ export class FormComponent implements OnInit {
   public formSalvo: boolean = false;
   public enderecoSalvo: any;
 
+  get cep() {
+    return this.enderecoForm.get('cep')!;
+  }
+
   constructor(
     private cepService: CepService,
     private formBuilder: FormBuilder
   ) {
     this.enderecoForm = this.formBuilder.group({
-      cep: new FormControl(''),
+      cep: ['', [Validators.required, CepValidators.isCEP]],
       logradouro: '',
       complemento: '',
       bairro: '',
